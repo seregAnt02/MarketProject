@@ -1,0 +1,168 @@
+﻿<Window x:Class="zero.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:zero"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:table="clr-namespace:zero.Tables"
+        xmlns:Dvc="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+        mc:Ignorable="d"            
+        Title="zero" Height="691" Width="1269">
+    <Grid x:Name="grid1" Background="Lavender">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="914*"/>
+            <ColumnDefinition Width="347*"/>
+        </Grid.ColumnDefinitions>
+
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="17,20,0,0" VerticalAlignment="Top" Width="71" Grid.Column="1" Height="22"/>
+        <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="17,74,0,0" VerticalAlignment="Top" Width="71" Grid.Column="1" Height="22"/>
+        <TextBox x:Name="textBox1" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="17,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <RadioButton x:Name="radioButton1" Content="Buy" Grid.Column="1" HorizontalAlignment="Left" Margin="118,25,0,0" VerticalAlignment="Top" Width="46" Height="17"/>
+        <ComboBox x:Name="comboBox2" Grid.Column="1" HorizontalAlignment="Left" Margin="118,74,0,0" VerticalAlignment="Top" Width="33" Height="21"/>
+        <RadioButton x:Name="radioButton2" Content="Sell" Grid.Column="1" HorizontalAlignment="Left" Margin="118,138,0,0" VerticalAlignment="Top" Width="46" Height="17"/>
+        <Button x:Name="button0" Content="+" Grid.Column="1" HorizontalAlignment="Left" Margin="183,22,0,0" VerticalAlignment="Top" Width="38" FontWeight="Bold" FontSize="16" Height="22"/>
+        <Button x:Name="button2" Content="-" Grid.Column="1" HorizontalAlignment="Left" Margin="183,72,0,0" VerticalAlignment="Top" Width="38" Height="23" FontWeight="Bold" FontSize="16"/>
+        <CheckBox x:Name="checkBox1" Content="no open" Grid.Column="1" HorizontalAlignment="Left" Margin="183,138,0,0" VerticalAlignment="Top" Width="65" Height="17" IsChecked="True"/>
+        <Button x:Name="button3" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="253,22,0,0" VerticalAlignment="Top" Width="69" Height="25"/>
+        <CheckBox x:Name="checkBox2" Content="down..." Grid.Column="1" HorizontalAlignment="Left" Margin="254,79,0,0" VerticalAlignment="Top" Width="61" Height="17"/>
+        <Button x:Name="button1" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="254,134,0,0" VerticalAlignment="Top" Width="69" Height="23"/>
+        <ListBox x:Name="listBox1" Grid.Column="1" HorizontalAlignment="Left" Height="238" Margin="17,176,0,0" VerticalAlignment="Top" Width="320"/>
+        <ProgressBar x:Name="progressBar1" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="17,429,0,0" VerticalAlignment="Top" Width="320"/>
+        <TabControl x:Name="tabControl1" Grid.Column="1" HorizontalAlignment="Left" Height="46" Margin="17,472,0,0" VerticalAlignment="Top" Width="320">
+            <TabItem Header="info">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="deals">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="465" Margin="20,176,0,0" VerticalAlignment="Top" Width="876"/>
+        <GroupBox x:Name="groupBox1" Grid.Column="1" HorizontalAlignment="Left" Height="151" Margin="10,10,0,0" VerticalAlignment="Top" Width="327"/>
+        <WrapPanel x:Name="wrap_panel" HorizontalAlignment="Left" Height="465" Margin="20,176,0,0" VerticalAlignment="Top" Width="876">
+            <WindowsFormsHost Height="464" Width="876">
+                <Dvc:Chart x:Name="chart_name"/>
+            </WindowsFormsHost>
+        </WrapPanel>
+        <Grid x:Name="table_info" HorizontalAlignment="Left" Height="106" Margin="20,20,0,0" VerticalAlignment="Top" Width="876">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="85"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="table_0_0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></TextBlock>
+            <TextBlock x:Name="table_0_1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBlock>
+            <TextBlock x:Name="table_0_2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"></TextBlock>
+            <TextBlock x:Name="table_0_3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3"></TextBlock>
+            <TextBlock x:Name="table_0_4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4"></TextBlock>
+            <TextBlock x:Name="table_0_5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="5"></TextBlock>
+            <TextBlock x:Name="table_0_6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="6"></TextBlock>
+            <TextBlock x:Name="table_0_7" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="7"></TextBlock>
+            <TextBlock x:Name="table_0_8" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="8"></TextBlock>
+            <TextBlock x:Name="table_0_9" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="9"></TextBlock>
+            <TextBlock x:Name="table_1_0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></TextBlock>
+            <TextBlock x:Name="table_1_1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"></TextBlock>
+            <TextBlock x:Name="table_1_2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"></TextBlock>
+            <TextBlock x:Name="table_1_3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3"></TextBlock>
+            <TextBlock x:Name="table_1_4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4"></TextBlock>
+            <TextBlock x:Name="table_1_5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="5"></TextBlock>
+            <TextBlock x:Name="table_1_6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="6"></TextBlock>
+            <TextBlock x:Name="table_1_7" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="7"></TextBlock>
+            <TextBlock x:Name="table_1_8" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="8"></TextBlock>
+            <TextBlock x:Name="table_1_9" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="9"></TextBlock>
+            <TextBlock x:Name="table_2_0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></TextBlock>
+            <TextBlock x:Name="table_2_1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"></TextBlock>
+            <TextBlock x:Name="table_2_2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"></TextBlock>
+            <TextBlock x:Name="table_2_3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3"></TextBlock>
+            <TextBlock x:Name="table_2_4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="4"></TextBlock>
+            <TextBlock x:Name="table_2_5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="5"></TextBlock>
+            <TextBlock x:Name="table_2_6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="6"></TextBlock>
+            <TextBlock x:Name="table_2_7" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="7"></TextBlock>
+            <TextBlock x:Name="table_2_8" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="8"></TextBlock>
+            <TextBlock x:Name="table_2_9" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="9"></TextBlock>
+            <TextBlock x:Name="table_3_0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"></TextBlock>
+            <TextBlock x:Name="table_3_1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"></TextBlock>
+            <TextBlock x:Name="table_3_2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"></TextBlock>
+            <TextBlock x:Name="table_3_3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="3"></TextBlock>
+            <TextBlock x:Name="table_3_4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="4"></TextBlock>
+            <TextBlock x:Name="table_3_5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="5"></TextBlock>
+            <TextBlock x:Name="table_3_6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="6"></TextBlock>
+            <TextBlock x:Name="table_3_7" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="7"></TextBlock>
+            <TextBlock x:Name="table_3_8" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="8"></TextBlock>
+            <TextBlock x:Name="table_3_9" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="9"></TextBlock>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="3" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="4" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="5" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="6" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="7" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="8" Grid.Row="0"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="9" Grid.Row="0"></Border>
+
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="3" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="4" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="5" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="6" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="7" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="8" Grid.Row="1"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="9" Grid.Row="1"></Border>
+
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="3" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="4" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="5" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="6" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="7" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="8" Grid.Row="2"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="9" Grid.Row="2"></Border>
+
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="3" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="4" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="5" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="6" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="7" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="8" Grid.Row="3"></Border>
+            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="9" Grid.Row="3"></Border>
+
+        </Grid>
+        <Label x:Name="label4" Grid.Column="1" HorizontalAlignment="Left" Margin="17,534,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Grid.Column="1" HorizontalAlignment="Left" Margin="26,589,0,0" VerticalAlignment="Top"/>
+
+        <Canvas x:Name="canvas_graf" Margin="20,176,18,20"/>
+    </Grid>
+</Window>
