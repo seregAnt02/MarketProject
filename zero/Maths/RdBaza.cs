@@ -21,7 +21,7 @@ namespace zero
         //private ToolStripButton toolStripButtonDataGrid, toolStripbuttonLine;
         //private ToolStripComboBox toolStripComboBoxSizeMode;
         //private GroupBox groupBox1;        
-        private TXmlConnector txmlConn;             
+        private TXmlConnector txmlConn;        
         public RdBaza(TXmlConnector txmlConn)
         {                                    
             this.txmlConn = txmlConn;     
@@ -29,7 +29,7 @@ namespace zero
             this.DealPointXY = new DealPointXY(txmlConn);            
             transaqString = new Cash(null, 0, new System.Drawing.Point(), null, 0, 0, 0, 0, null);                                    
             mathSredProfStop = new MathSredProfStop();                                  
-            Main_window.tabControl1.SelectionChanged += TabControl1_SelectionChanged;
+            if(Main_window != null) Main_window.tabControl1.SelectionChanged += TabControl1_SelectionChanged;
         }
         //================================================================================
         //================================================================================
@@ -232,7 +232,7 @@ namespace zero
             }
         }
         //================================================================================           
-        bool Goal(string время, double en)
+        bool Goal(string timeEnter, double en)
         {
             bool fl = false; if (en != 0) 
             {                
@@ -280,7 +280,7 @@ namespace zero
             if (Mode == "тест") ServOrder(time, en, "cancelled", quantity);
         }
         //================================================================================            
-        public void ServOrder(string time, double en, string status, int quantity) {
+        public string ServOrder(string time, double en, string status, int quantity) {
             Thread.Sleep(300);// !!!
             string key = null, vol = null, price = null;
             if (TransaqString.Market == -1) {
@@ -290,15 +290,18 @@ namespace zero
             else price = RenamePrice(en.ToString());
             key = "time;seccode;order;orderno;price;buysell;quantity;brokerref;status";
             long orderno = TransaqString.Orderno; if (status == "active") {
-                string[] idFlag = ParsId(null);
+                string[] idFlag = ParsId(null); //!!!
                 orderno = long.Parse(idFlag[1]);
                 //status = Nolimit(time, TransaqString.Buysell, TransaqString.Вход, status);
             }
-            vol = time + ";" + Main_window.comboBox1.Text + ";" + TransaqString.Order + ";"
+            var comboBox1 = Main_window != null ? Main_window.comboBox1.Text : null;
+            vol = time + ";" + comboBox1 + ";" + TransaqString.Order + ";"
                 + orderno + ";" + price + ";" + TransaqString.Buysell + ";"
                 + quantity + ";" + TransaqString.Brokerref + ";" + status;
             txmlConn.OrdersNew.OnNewOrdersEvent(key, vol);// ордер синхронный метод
             if (status == "matched") txmlConn.TradesNew.OnNewTradesEvent(key, vol);//сделка !!! синхронный метод                                
+
+            return status;
         }
         //================================================================================
         public string Nolimit(string time, string buysell, double open, string status)

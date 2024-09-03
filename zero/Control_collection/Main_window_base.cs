@@ -11,12 +11,16 @@ namespace zero.Control_collection {
             Collection_control();
         }
         public MainWindow Main_window { get; set; }
-        void Collection_control() {
-            foreach (Window item in Application.Current.Windows) {
-                if (item is MainWindow) {
-                    Main_window = item as MainWindow;
+        void Collection_control()
+        {
+            if (Application.Current != null)
+                foreach (Window item in Application.Current.Windows)
+                {
+                    if (item is MainWindow)
+                    {
+                        Main_window = item as MainWindow;
+                    }
                 }
-            }
         }
     }
 }

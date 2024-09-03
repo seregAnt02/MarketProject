@@ -25,6 +25,7 @@ namespace zero
         //----------------------------------------------------
         MainWindow main_window;
         void Collection_control() {
+            if(Application.Current != null)
             foreach (Window item in Application.Current.Windows) {
                 if (item is MainWindow) {
                     main_window = item as MainWindow;

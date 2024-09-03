@@ -22,7 +22,7 @@ namespace zero.Data
         public string Comission { get; set; }
         //----------------------------------------------------
         private GroupBox groupBox1;
-        private Button button0, button2, button3_txt_Connect;
+        private Button button0, button2, buttonConnect;
         private event NewStringDataTwo onOrdersEvent;        
         private Panel panel1;
         private ListView listView;
@@ -38,6 +38,7 @@ namespace zero.Data
         //----------------------------------------------------
         MainWindow main_window;
         void Collection_control() {
+            if(Application.Current != null)
             foreach (Window item in Application.Current.Windows) {
                 if (item is MainWindow) {
                     main_window = item as MainWindow;
@@ -58,7 +59,7 @@ namespace zero.Data
                         if (button != null) {
                             if (button.Name == "button0") button0 = button;                            
                             if (button.Name == "button2") button2 = button;
-                            if (button.Name == "button3") button3_txt_Connect = button;
+                            if (button.Name == "button3") buttonConnect = button;
                         }                                                                                                
                     }
                 }
@@ -73,7 +74,7 @@ namespace zero.Data
             string[] ky = key.Split(';'); string[] vl = vol.Split(';');
             string element = null; for (int x = 0; x < ky.Length; x++)
             {
-                if (button3_txt_Connect.Content.ToString() == "online") Date = DateTime.Now; if (ky[x] == "time" && vl[x] != "")
+                if (buttonConnect != null && buttonConnect.Content.ToString() == "online") Date = DateTime.Now; if (ky[x] == "time" && vl[x] != "")
                     Date = DateTime.Parse(vl[x]);
                 if (ky[x] == "time") Time = DateTime.Parse(vl[x]).ToString("HH:mm:ss");
                 if (ky[x] == "seccode") Seccode = vl[x];
@@ -145,7 +146,7 @@ namespace zero.Data
             else
             {
 
-                button2.Background = Brushes.Yellow;
+                if(button2 != null) button2.Background = Brushes.Yellow;
             }
         }
     }

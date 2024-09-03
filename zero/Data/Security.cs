@@ -43,7 +43,8 @@ namespace zero.Data
         //----------------------------------------------------
         MainWindow main_window;
         void Collection_control() {
-            foreach (Window item in Application.Current.Windows) {
+            if (Application.Current != null)
+                foreach (Window item in Application.Current.Windows) {
                 if (item is MainWindow) {
                     main_window = item as MainWindow;
                     Grid grid = (Grid)item.Content;

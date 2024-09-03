@@ -9,6 +9,7 @@ namespace zero
 {
     class Cash
     {
+        public Cash() { }
         public Cash(string buysell, double вход, Point enterPointXY, string status,
             int market, long orderno, long orders, int count, string brokerref)
         {

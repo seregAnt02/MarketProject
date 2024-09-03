@@ -60,49 +60,57 @@ namespace zero
             //excelPatok = new ExcellBegin(excel.Excel);
             Collection_control();
 
-            button0.Click += Button0_Click;
-            button3_txt_Connect.Click += btInterfice;
+            if(button0 != null) button0.Click += Button0_Click;
+            if(button3_txt_Connect != null) button3_txt_Connect.Click += btInterfice;
         }        
         //----------------------------------------------------
         MainWindow main_window;
-        void Collection_control() {
-            foreach (Window item in Application.Current.Windows) {
-                if (item is MainWindow) {
-                    main_window = item as MainWindow;
-                    Grid grid = (Grid)item.Content;
-                    foreach (var item_control in grid.Children) {
-                        WrapPanel wrap_panel = item_control is WrapPanel ? item_control as WrapPanel : null;
-                        GroupBox group_box = item_control is GroupBox ? item_control as GroupBox : null;
-                        ListView list_view = item_control is ListView ? item_control as ListView : null;
-                        ComboBox combo_box = item_control is ComboBox ? item_control as ComboBox : null;
-                        Button button = item_control is Button ? item_control as Button : null;
-                        RadioButton radio_button = item_control is RadioButton ? item_control as RadioButton : null;
-                        CheckBox check_box = item_control is CheckBox ? item_control as CheckBox : null;
-                        TextBox text_box = item_control is TextBox ? item_control as TextBox : null;
+        void Collection_control()
+        {
+            if (Application.Current != null)
+                foreach (Window item in Application.Current.Windows)
+                {
+                    if (item is MainWindow)
+                    {
+                        main_window = item as MainWindow;
+                        Grid grid = (Grid)item.Content;
+                        foreach (var item_control in grid.Children)
+                        {
+                            WrapPanel wrap_panel = item_control is WrapPanel ? item_control as WrapPanel : null;
+                            GroupBox group_box = item_control is GroupBox ? item_control as GroupBox : null;
+                            ListView list_view = item_control is ListView ? item_control as ListView : null;
+                            ComboBox combo_box = item_control is ComboBox ? item_control as ComboBox : null;
+                            Button button = item_control is Button ? item_control as Button : null;
+                            RadioButton radio_button = item_control is RadioButton ? item_control as RadioButton : null;
+                            CheckBox check_box = item_control is CheckBox ? item_control as CheckBox : null;
+                            TextBox text_box = item_control is TextBox ? item_control as TextBox : null;
 
-                        if (group_box != null && group_box.Name == "groupBox1") groupBox1 = group_box;
-                        if (wrap_panel != null && wrap_panel.Name == "panel1") panel1 = wrap_panel;
-                        if (list_view != null && list_view.Name == "listView") listView = list_view;
-                        if (button != null) {
-                            if (button.Name == "button0") button0 = button;
-                            if (button.Name == "button1") button1Down = button;
-                            if (button.Name == "button2") button2 = button;
-                            if (button.Name == "button3") button3_txt_Connect = button;
+                            if (group_box != null && group_box.Name == "groupBox1") groupBox1 = group_box;
+                            if (wrap_panel != null && wrap_panel.Name == "panel1") panel1 = wrap_panel;
+                            if (list_view != null && list_view.Name == "listView") listView = list_view;
+                            if (button != null)
+                            {
+                                if (button.Name == "button0") button0 = button;
+                                if (button.Name == "button1") button1Down = button;
+                                if (button.Name == "button2") button2 = button;
+                                if (button.Name == "button3") button3_txt_Connect = button;
+                            }
+                            if (radio_button != null)
+                            {
+                                if (radio_button.Name == "radioButton1") radioButton1 = radio_button;
+                                if (radio_button.Name == "radioButton2") radioButton2 = radio_button;
+                            }
+                            if (check_box != null && check_box.Name == "checkBox2") checkBox2 = check_box;
+                            if (combo_box != null)
+                            {
+                                if (combo_box.Name == "comboBox1") comboBox1 = combo_box;
+                                if (combo_box.Name == "comboBox2") comboBox2 = combo_box;
+                                if (combo_box.Name == "comboBox3") comboBox3 = combo_box;
+                            }
+                            if (text_box != null && text_box.Name == "textBox1") textBox1 = text_box;
                         }
-                        if (radio_button != null) {
-                            if (radio_button.Name == "radioButton1") radioButton1 = radio_button;
-                            if (radio_button.Name == "radioButton2") radioButton2 = radio_button;                            
-                        }
-                        if (check_box != null && check_box.Name == "checkBox2") checkBox2 = check_box;
-                        if (combo_box != null) {
-                            if (combo_box.Name == "comboBox1") comboBox1 = combo_box;
-                            if (combo_box.Name == "comboBox2") comboBox2 = combo_box;
-                            if (combo_box.Name == "comboBox3") comboBox3 = combo_box;
-                        }                        
-                        if (text_box != null && text_box.Name == "textBox1") textBox1 = text_box;                         
                     }
                 }
-            }
         }
         //----------------------------------------------------
         public int session_timeout, request_timeout;

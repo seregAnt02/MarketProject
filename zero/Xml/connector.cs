@@ -106,8 +106,9 @@ namespace zero
             string logPath = "D:\\Logs\\\0"; // !!! для сервера деревня "D" диск ... доделать
             if (ConnectorInitialize(logPath, 3)) statusDisconnected.Set();
 
-            WindowCollection windowCollection = Application.Current.Windows;
+            WindowCollection windowCollection = Application.Current != null ? Application.Current.Windows : null;
 
+            if(Application.Current != null)
             foreach( var item in ((Grid)Application.Current.MainWindow.Content).Children) {
                 if(item is ListBox) listBox1 = (ListBox)item;
 
@@ -698,7 +699,7 @@ namespace zero
         private void List_box(string s, string control)
         {
 
-            if (control == "listBox1")
+            if (listBox1 != null && control == "listBox1")
             {
                 listBox1.Dispatcher.Invoke(() => { listBox1.Items.Insert(0, s); });                
             }

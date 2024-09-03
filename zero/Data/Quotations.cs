@@ -26,6 +26,7 @@ namespace zero.Data
         private ListView listView;
         private TXmlConnector txlmConn;
         //----------------------------------------------------
+        public Quotations() { }
         public Quotations(TXmlConnector txmlConn)
         {
             onQuotationsEvent += Add_Quotations;                        
@@ -45,7 +46,8 @@ namespace zero.Data
         //----------------------------------------------------
         private MainWindow main_window;
         void Collection_control() {
-            foreach (Window item in Application.Current.Windows) {
+            if (Application.Current != null)
+                foreach (Window item in Application.Current.Windows) {
                 if (item is MainWindow) {
                     main_window = item as MainWindow;
                     Grid grid = (Grid)item.Content;

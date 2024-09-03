@@ -37,11 +37,12 @@ namespace zero
             patokDown = new PatokDown(SqlReader);
             Collection_control();
 
-            button1Down.Click += btТест;
+            if(button1Down != null) button1Down.Click += btТест;
             this.txmlConn = txmlConn;
         }
         //----------------------------------------------------
         void Collection_control() {
+            if(Application.Current != null)
             foreach (Window item in Application.Current.Windows) {
                 if (item is MainWindow) {
                     main_window = item as MainWindow;

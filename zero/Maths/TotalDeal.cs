@@ -16,7 +16,7 @@ namespace zero {
         public TotalDeal(TXmlConnector txmlConn) {
             this.txmlConn = txmlConn;            
 
-            Main_window.tabControl1.SelectionChanged += TabControl1_SelectionChanged;
+            if(Main_window != null) Main_window.tabControl1.SelectionChanged += TabControl1_SelectionChanged;
 
             /*series = Main_window.chart_name.Series["series_0"];                        
             series.Points.AddXY(0, -50);
