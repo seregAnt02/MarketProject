@@ -280,7 +280,7 @@ namespace zero
             if (Mode == "тест") ServOrder(time, en, "cancelled", quantity);
         }
         //================================================================================            
-        public string ServOrder(string time, double en, string status, int quantity) {
+        public void ServOrder(string time, double en, string status, int quantity) {
             Thread.Sleep(300);// !!!
             string key = null, vol = null, price = null;
             if (TransaqString.Market == -1) {
@@ -299,9 +299,7 @@ namespace zero
                 + orderno + ";" + price + ";" + TransaqString.Buysell + ";"
                 + quantity + ";" + TransaqString.Brokerref + ";" + status;
             txmlConn.OrdersNew.OnNewOrdersEvent(key, vol);// ордер синхронный метод
-            if (status == "matched") txmlConn.TradesNew.OnNewTradesEvent(key, vol);//сделка !!! синхронный метод                                
-
-            return status;
+            if (status == "matched") txmlConn.TradesNew.OnNewTradesEvent(key, vol);//сделка !!! синхронный метод                                           
         }
         //================================================================================
         public string Nolimit(string time, string buysell, double open, string status)

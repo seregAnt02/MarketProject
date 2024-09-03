@@ -12,7 +12,7 @@ namespace zero.Tests
     public class SystemTest
     {
         [Fact]
-        public void SistemResultNotNull()
+        public void SistemResultEqualValue()
         {
             // Arrange
             //HomeController controller = new HomeController();
@@ -26,11 +26,11 @@ namespace zero.Tests
             rdBaza.TransaqString.Вход = 123.0;
 
             //rdBaza.Orders(DateTime.Now.TimeOfDay.ToString());            
-            string status = rdBaza.ServOrder(DateTime.Now.TimeOfDay.ToString(), rdBaza.TransaqString.Вход,
+            rdBaza.ServOrder(DateTime.Now.TimeOfDay.ToString(), rdBaza.TransaqString.Вход,
                 rdBaza.TransaqString.Status, 1);
 
             // Assert
-            Assert.Equal("вход", status);
+            Assert.Equal("вход", rdBaza.TransaqString.Status);
         }
     }
 }
