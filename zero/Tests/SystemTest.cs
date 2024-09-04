@@ -25,7 +25,7 @@ namespace zero.Tests
             xmlConnector.RdBazaNew.TransaqString.Status = "вход";
             xmlConnector.RdBazaNew.TransaqString.Buysell = "B";
             xmlConnector.RdBazaNew.TransaqString.Вход = 123.0;
-            xmlConnector.RdBazaNew.TransaqString.Quantity = 1;
+            xmlConnector.RdBazaNew.TransaqString.Quantity = 1;            
 
             xmlConnector.QuotationsNew.Bid = 125.0;
             xmlConnector.QuotationsNew.Offer = 121.0;

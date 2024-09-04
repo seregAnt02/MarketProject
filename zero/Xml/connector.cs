@@ -90,8 +90,13 @@ namespace zero
             InsertBdNew = new InsertBd(this);
             DownloadNew = new Download(this);
             StatusNew = new Status(TransaqNew);
-            myCallbackDelegate = new CallBackDelegate(myCallBack);
-            ConnectorSetCallback();
+
+            if (this.RdBazaNew.AutoTestCheck)
+            {
+                myCallbackDelegate = new CallBackDelegate(myCallBack);
+                ConnectorSetCallback();
+            }            
+
             AlltradesNew = new Alltrades(this);
             ClientsNew = new Clients(this);
             OrdersNew = new Orders(this);
@@ -101,10 +106,15 @@ namespace zero
             SecinfoNew = new Secinfo(this);
             SecurityNew = new Security(this);
             TradesNew = new Trades(this);
+
             string path = Directory.GetCurrentDirectory();//Application.ExecutablePath;
             TransaqNew.AppDir = path.Substring(0, path.LastIndexOf('\\') + 1);
-            string logPath = "D:\\Logs\\\0"; // !!! для сервера деревня "D" диск ... доделать
-            if (ConnectorInitialize(logPath, 3)) statusDisconnected.Set();
+
+            if (this.RdBazaNew.AutoTestCheck)
+            {
+                string logPath = "D:\\Logs\\\0"; // !!! для сервера деревня "D" диск ... доделать
+                if (ConnectorInitialize(logPath, 3)) statusDisconnected.Set();
+            }            
 
             WindowCollection windowCollection = Application.Current != null ? Application.Current.Windows : null;
 

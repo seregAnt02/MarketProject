@@ -59,7 +59,9 @@ namespace zero
             txmlConn.TransaqNew.code.AddRange(new string[] { "RNH9", "RNU9", "ROSN", "RIH2" });
             txmlConn.TransaqNew.board.AddRange(new string[] { "FUT", "FUT", "TQBR", "FUT" });
             if (txmlConn.DownloadNew.MachineName == "nameSever") txmlConn.DownloadNew.Home = "nameServer";
-            if (txmlConn.DownloadNew.MachineName == "nameServer") txmlConn.DownloadNew.Home = "nameServer";            
+            if (txmlConn.DownloadNew.MachineName == "nameServer") txmlConn.DownloadNew.Home = "nameServer";       
+            
+            txmlConn.RdBazaNew.AutoTestCheck = true;
         }                                 
         //----------------------------------------------------
         //----------------------------------------------------

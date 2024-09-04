@@ -786,8 +786,15 @@ namespace zero
                 if(txmlConn.QuotationsNew.Last < avgpoint) vol = -1; if(txmlConn.QuotationsNew.Last > avgpoint) vol = 1;
             }
             return vol;
-        }                                        
-        //================================================================================  
+        }
+        //--------------------------------------
+        public bool AutoTestCheck
+        {
+            get;
+            set;
+        }
+        //--------------------------------------
+        
         private PointMas pointXY = new PointMas();
         public PointMas PointXY
         {
