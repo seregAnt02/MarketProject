@@ -87,16 +87,16 @@ namespace zero
             {
                 AddDeal(buysell, price, orderno, 0, brokerref);
                 mus = quantity; Delta = 0;
-                for (int x = 0; x < TransaqString.Cashs.Count; x++)
+                for (int x = 0; x < txmlConn.RdBazaNew.TransaqString.Cashs.Count; x++)
                 {
                     InsertCount(x, time, buysell, price, orderno, quantity, brokerref);
-                    if (mus != 0 && TransaqString.Cashs[x].Buysell != buysell)
+                    if (mus != 0 && txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell != buysell)
                     { Delete(time, buysell, price, orderno, quantity, brokerref, ref x); sumDeal++; }                    
                     if (x != -1)
                     {
-                        if (TransaqString.Cashs[x].Buysell == "B") Delta += TransaqString.Cashs[x].Quantity;
-                        if (TransaqString.Cashs[x].Buysell == "S") Delta -= TransaqString.Cashs[x].Quantity;
-                        Balance = TransaqString.Cashs[x].Вход;
+                        if (txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell == "B") Delta += txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity;
+                        if (txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell == "S") Delta -= txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity;
+                        Balance = txmlConn.RdBazaNew.TransaqString.Cashs[x].Вход;
                         str += TransactionCashShow(time, x);
                     }
                     if (x == -1) { str = null; Balance = 0; Delta = 0; }
@@ -113,17 +113,17 @@ namespace zero
         void InsertCount(int x, string time, string buysell,
             double price, long orderno, int quantity, string brokerref)
         {
-            if (TransaqString.Cashs[x].Buysell == buysell &&
-                price == TransaqString.Cashs[x].Вход) TransaqString.Cashs[x].Quantity += quantity;
+            if (txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell == buysell &&
+                price == txmlConn.RdBazaNew.TransaqString.Cashs[x].Вход) txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity += quantity;
         }
         //===============================================================================
         void AddDeal(string buysell, double price,
              long orderno, int quantity, string brokerref)
         {
-            if (TransaqString.Cashs.Count == 0 || TransaqString.Cashs.Count > 0 &&
-                TransaqString.Cashs[0].Buysell == buysell && TransaqString.Cashs[0].Вход != price)//!! проверяет только нулевой ...                
+            if (txmlConn.RdBazaNew.TransaqString.Cashs.Count == 0 || txmlConn.RdBazaNew.TransaqString.Cashs.Count > 0 &&
+                txmlConn.RdBazaNew.TransaqString.Cashs[0].Buysell == buysell && txmlConn.RdBazaNew.TransaqString.Cashs[0].Вход != price)//!! проверяет только нулевой ...                
             {                
-                TransaqString.Cashs.Add(new Cash(buysell, price, new System.Drawing.Point(), "matched",
+                txmlConn.RdBazaNew.TransaqString.Cashs.Add(new Cash(buysell, price, new System.Drawing.Point(), "matched",
                          0, orderno, 0, quantity, brokerref));                 
             }
         }
@@ -131,16 +131,16 @@ namespace zero
         void Delete(string time, string buysell, double price,
              long orderno, int quantity, string brokerref, ref int x)
         {
-            StopLoss(time, TransaqString.Cashs[x].Вход, TransaqString.Cashs[x].Quantity, price, x);
-            int sum = TransaqString.Cashs[x].Quantity;
+            StopLoss(time, txmlConn.RdBazaNew.TransaqString.Cashs[x].Вход, txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity, price, x);
+            int sum = txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity;
             if (sum - mus == 0)
             {
-                mus = 0; TransaqString.Cashs.RemoveAt(x); x--;
+                mus = 0; txmlConn.RdBazaNew.TransaqString.Cashs.RemoveAt(x); x--;
             }
             if (mus > 0 && sum - mus > 0)
             {
                 sum = sum - mus; mus = 0;
-                TransaqString.Cashs[x].Quantity = sum;
+                txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity = sum;
             }
             if (sum - mus < 0)
             {
@@ -152,82 +152,82 @@ namespace zero
         void CashInsert(string time, string buysell, double price,
              long orderno, int quantity, string brokerref,ref int x)
         {
-            if (TransaqString.Cashs.Count == 1)
+            if (txmlConn.RdBazaNew.TransaqString.Cashs.Count == 1)
             {
-                TransaqString.Cashs[x].Buysell = buysell;
-                TransaqString.Cashs[x].Вход = price;
-                TransaqString.Cashs[x].Orderno = orderno;
-                TransaqString.Cashs[x].Quantity = quantity;
-                TransaqString.Cashs[x].Brokerref = brokerref;
+                txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell = buysell;
+                txmlConn.RdBazaNew.TransaqString.Cashs[x].Вход = price;
+                txmlConn.RdBazaNew.TransaqString.Cashs[x].Orderno = orderno;
+                txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity = quantity;
+                txmlConn.RdBazaNew.TransaqString.Cashs[x].Brokerref = brokerref;
             }
-            else { TransaqString.Cashs.RemoveAt(x); x--; }
+            else { txmlConn.RdBazaNew.TransaqString.Cashs.RemoveAt(x); x--; }
         }
         //================================================================================ 
         public void TransactStringAdd(string status, int market, long order)
         {
-            TransaqString.Buysell = txmlConn.QuotationsNew.Buysell;
-            TransaqString.Вход = double.Parse(txmlConn.QuotationsNew.Price);
-            TransaqString.Status = status;
-            TransaqString.Market = market;
-            TransaqString.Order = order;
-            TransaqString.Quantity = txmlConn.QuotationsNew.Quantity;
-            TransaqString.Brokerref = txmlConn.QuotationsNew.Brokerref;
+            txmlConn.RdBazaNew.TransaqString.Buysell = txmlConn.QuotationsNew.Buysell;
+            txmlConn.RdBazaNew.TransaqString.Вход = double.Parse(txmlConn.QuotationsNew.Price);
+            txmlConn.RdBazaNew.TransaqString.Status = status;
+            txmlConn.RdBazaNew.TransaqString.Market = market;
+            txmlConn.RdBazaNew.TransaqString.Order = order;
+            txmlConn.RdBazaNew.TransaqString.Quantity = txmlConn.QuotationsNew.Quantity;
+            txmlConn.RdBazaNew.TransaqString.Brokerref = txmlConn.QuotationsNew.Brokerref;
         }
         //================================================================================       
         public string TransactionCashShow(string time, int x)
         {
             string str = null;
-            str = "{" + time + "} " + TransaqString.Cashs[x].Buysell + ";" + TransaqString.Cashs[x].Вход + ";" +
-                 null + ";" + TransaqString.Cashs[x].Status + ";" +
-                 TransaqString.Cashs[x].Market + ";" + TransaqString.Cashs[x].Orderno + ";" +
-                 TransaqString.Cashs[x].Order + ";" + TransaqString.Cashs[x].Quantity + ";" +
-                 TransaqString.Cashs[x].Brokerref + "\r";
+            str = "{" + time + "} " + txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell + ";" + txmlConn.RdBazaNew.TransaqString.Cashs[x].Вход + ";" +
+                 null + ";" + txmlConn.RdBazaNew.TransaqString.Cashs[x].Status + ";" +
+                 txmlConn.RdBazaNew.TransaqString.Cashs[x].Market + ";" + txmlConn.RdBazaNew.TransaqString.Cashs[x].Orderno + ";" +
+                 txmlConn.RdBazaNew.TransaqString.Cashs[x].Order + ";" + txmlConn.RdBazaNew.TransaqString.Cashs[x].Quantity + ";" +
+                 txmlConn.RdBazaNew.TransaqString.Cashs[x].Brokerref + "\r";
             return str;
         }
         public string TransactionShow(string time)
         {
             string str = null;
-            str = "{" + time + "} " + TransaqString.Buysell + ";" + TransaqString.Вход + ";" +
-                 null + ";" + TransaqString.Status + ";" + TransaqString.Market +
-                 ";" + TransaqString.Orderno + ";" + TransaqString.Order + ";" +
-                 TransaqString.Quantity + ";" + TransaqString.Brokerref + "\r";
+            str = "{" + time + "} " + txmlConn.RdBazaNew.TransaqString.Buysell + ";" + txmlConn.RdBazaNew.TransaqString.Вход + ";" +
+                 null + ";" + txmlConn.RdBazaNew.TransaqString.Status + ";" + txmlConn.RdBazaNew.TransaqString.Market +
+                 ";" + txmlConn.RdBazaNew.TransaqString.Orderno + ";" + txmlConn.RdBazaNew.TransaqString.Order + ";" +
+                 txmlConn.RdBazaNew.TransaqString.Quantity + ";" + txmlConn.RdBazaNew.TransaqString.Brokerref + "\r";
             return str;
         }
         //================================================================================            
         public void Orders(string time)
         {
-            string res = null; if (Goal(time, TransaqString.Вход))
+            string res = null; if (Goal(time, txmlConn.RdBazaNew.TransaqString.Вход))
             {
-                if (TransaqString.Status == "вход" && TransaqString.Order == 0)
+                if (txmlConn.RdBazaNew.TransaqString.Status == "вход" && txmlConn.RdBazaNew.TransaqString.Order == 0)
                 {
                     if (mode == "боевой" && Main_window.button3.Content.ToString() == "online")
                     {
                         res = txmlConn.TransaqNew.NewOrder(); // порядок
                     }
-                    string[] idFlag = ParsId(res); TransaqString.Order = long.Parse(idFlag[1]);
+                    string[] idFlag = ParsId(res); txmlConn.RdBazaNew.TransaqString.Order = long.Parse(idFlag[1]);
                     if (mode == "тест")
                     {
-                        if (TransaqString.Market == 0)
-                            ServOrder(time, TransaqString.Вход, "active", TransaqString.Quantity);
-                        if (TransaqString.Market == -1)
-                            ServOrder(time, TransaqString.Вход, "matched", TransaqString.Quantity);
+                        if (txmlConn.RdBazaNew.TransaqString.Market == 0)
+                            ServOrder(time, txmlConn.RdBazaNew.TransaqString.Вход, "active", txmlConn.RdBazaNew.TransaqString.Quantity);
+                        if (txmlConn.RdBazaNew.TransaqString.Market == -1)
+                            ServOrder(time, txmlConn.RdBazaNew.TransaqString.Вход, "matched", txmlConn.RdBazaNew.TransaqString.Quantity);
                     }
                 }
-                else if (mode == "тест" && TransaqString.Status == "active")
-                    ServOrder(time, TransaqString.Вход, "matched", TransaqString.Quantity);
+                else if (mode == "тест" && txmlConn.RdBazaNew.TransaqString.Status == "active")
+                    ServOrder(time, txmlConn.RdBazaNew.TransaqString.Вход, "matched", txmlConn.RdBazaNew.TransaqString.Quantity);
             }
         }
         //================================================================================
         public void OrdernoQuantity(long orderno, int quantity)
         {
-            if(TransaqString.Orderno == orderno)
+            if(txmlConn.RdBazaNew.TransaqString.Orderno == orderno)
             {
-                TransaqString.Quantity -= quantity;
-                if (TransaqString.Quantity == 0)
+                txmlConn.RdBazaNew.TransaqString.Quantity -= quantity;
+                if (txmlConn.RdBazaNew.TransaqString.Quantity == 0)
                 {
-                    TransaqString.Order = 0; TransaqString.Orderno = 0; 
-                    TransaqString.Brokerref = null; TransaqString.Market = 0;
-                    TransaqString.Status = null;
+                    txmlConn.RdBazaNew.TransaqString.Order = 0; txmlConn.RdBazaNew.TransaqString.Orderno = 0; 
+                    txmlConn.RdBazaNew.TransaqString.Brokerref = null; txmlConn.RdBazaNew.TransaqString.Market = 0;
+                    txmlConn.RdBazaNew.TransaqString.Status = null;
                 }
             }
         }
@@ -236,12 +236,12 @@ namespace zero
         {
             bool fl = false; if (en != 0) 
             {                
-                double bo = BidOff(TransaqString.Buysell);
-                if (TransaqString.Status == "вход" && Target(en, txmlConn.QuotationsNew.Last, LastOld(), "=")) fl = true;
-                if (TransaqString.Buysell == "S" &&
-                    TransaqString.Status == "active" && bo > en) fl = true;
-                if (TransaqString.Buysell == "B" && 
-                    TransaqString.Status == "active" && bo < en) fl = true;                
+                double bo = BidOff(txmlConn.RdBazaNew.TransaqString.Buysell);
+                if (txmlConn.RdBazaNew.TransaqString.Status == "вход" && Target(en, txmlConn.QuotationsNew.Last, LastOld(), "=")) fl = true;
+                if (txmlConn.RdBazaNew.TransaqString.Buysell == "S" &&
+                    txmlConn.RdBazaNew.TransaqString.Status == "active" && bo > en) fl = true;
+                if (txmlConn.RdBazaNew.TransaqString.Buysell == "B" && 
+                    txmlConn.RdBazaNew.TransaqString.Status == "active" && bo < en) fl = true;                
             }
             if (transaqString.Market == -1) fl = true;            
             return fl;
@@ -250,8 +250,8 @@ namespace zero
         double LastOld()
         {
             double lastActiv = 0;
-            if (TransaqString.Buysell == "S") lastActiv = txmlConn.QuotationsNew.High;
-            if (TransaqString.Buysell == "B") lastActiv = txmlConn.QuotationsNew.Low;
+            if (txmlConn.RdBazaNew.TransaqString.Buysell == "S") lastActiv = txmlConn.QuotationsNew.High;
+            if (txmlConn.RdBazaNew.TransaqString.Buysell == "B") lastActiv = txmlConn.QuotationsNew.Low;
             return lastActiv;
         }
         //================================================================================    
@@ -267,13 +267,13 @@ namespace zero
         {
             if (Mode == "боевой" && Main_window.button3.Content.ToString() == "online")
             {
-                string res = null;if (TransaqString.Status != null)
+                string res = null;if (txmlConn.RdBazaNew.TransaqString.Status != null)
                 {
-                    res = txmlConn.TransaqNew.Cancelorder(time, TransaqString.Order);
+                    res = txmlConn.TransaqNew.Cancelorder(time, txmlConn.RdBazaNew.TransaqString.Order);
                     string[] idFlag = ParsId(res);
                     if (idFlag[0] == "true")
                     {
-                        TransaqString.Order = 0; TransaqString.Orderno = 0;
+                        txmlConn.RdBazaNew.TransaqString.Order = 0; txmlConn.RdBazaNew.TransaqString.Orderno = 0;
                     }
                 }                
             }
@@ -283,21 +283,21 @@ namespace zero
         public void ServOrder(string time, double en, string status, int quantity) {
             Thread.Sleep(300);// !!!
             string key = null, vol = null, price = null;
-            if (TransaqString.Market == -1) {
-                if (TransaqString.Buysell == "S") price = txmlConn.QuotationsNew.Bid.ToString();
-                if (TransaqString.Buysell == "B") price = txmlConn.QuotationsNew.Offer.ToString();
+            if (txmlConn.RdBazaNew.TransaqString.Market == -1) {
+                if (txmlConn.RdBazaNew.TransaqString.Buysell == "S") price = txmlConn.QuotationsNew.Bid.ToString();
+                if (txmlConn.RdBazaNew.TransaqString.Buysell == "B") price = txmlConn.QuotationsNew.Offer.ToString();
             }
             else price = RenamePrice(en.ToString());
             key = "time;seccode;order;orderno;price;buysell;quantity;brokerref;status";
-            long orderno = TransaqString.Orderno; if (status == "active") {
+            long orderno = txmlConn.RdBazaNew.TransaqString.Orderno; if (status == "active") {
                 string[] idFlag = ParsId(null); //!!!
                 orderno = long.Parse(idFlag[1]);
                 //status = Nolimit(time, TransaqString.Buysell, TransaqString.Вход, status);
             }
             var comboBox1 = Main_window != null ? Main_window.comboBox1.Text : null;
-            vol = time + ";" + comboBox1 + ";" + TransaqString.Order + ";"
-                + orderno + ";" + price + ";" + TransaqString.Buysell + ";"
-                + quantity + ";" + TransaqString.Brokerref + ";" + status;
+            vol = time + ";" + comboBox1 + ";" + txmlConn.RdBazaNew.TransaqString.Order + ";"
+                + orderno + ";" + price + ";" + txmlConn.RdBazaNew.TransaqString.Buysell + ";"
+                + quantity + ";" + txmlConn.RdBazaNew.TransaqString.Brokerref + ";" + status;
             txmlConn.OrdersNew.OnNewOrdersEvent(key, vol);// ордер синхронный метод
             if (status == "matched") txmlConn.TradesNew.OnNewTradesEvent(key, vol);//сделка !!! синхронный метод                                           
         }
@@ -681,37 +681,37 @@ namespace zero
         void StopLoss(string vr, double en, int quantity, double close, int x)
         {
             string deal = null;
-            if (TransaqString.Cashs[x].Buysell == "S" && en < close)
+            if (txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell == "S" && en < close)
             {
                 double sp = Math.Round(Spred(en, close), 3); stopDeal += sp * quantity; //if (stop == null) stop = en.ToString(); else stop = stop + ";" + en;
                 string s = "{" + vr + "} " + "S" + " /  " + en + "/ " + close + "/ " + (sp * quantity) +
                     "{" + txmlConn.QuotationsNew.Bid + "/" + txmlConn.QuotationsNew.Offer + "}"; //cs.vol52 = null;
                 Main_window.table_1_7.Text = lastDeal.ToString();
-                deal = "stop"; txmlConn.Lb.BeginInvoke(deal + " " + s + " =>" + TransaqString.Cashs[x].Brokerref, "listBox1", null, null);
+                deal = "stop"; txmlConn.Lb.BeginInvoke(deal + " " + s + " =>" + txmlConn.RdBazaNew.TransaqString.Cashs[x].Brokerref, "listBox1", null, null);
             }
-            if (TransaqString.Cashs[x].Buysell == "S" && en > close)
+            if (txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell == "S" && en > close)
             {
                 double sp = Math.Round(Spred(en, close), 3); profStop += sp * quantity;
                 string s = "{" + vr + "} " + "S" + " / " + en + "/ " + close + "/ " + (sp * quantity) + 
                     "{" + txmlConn.QuotationsNew.Bid + "/" + txmlConn.QuotationsNew.Offer + "}"; //cs.vol52 = null;
                 Main_window.table_1_7.Text = lastDeal.ToString();
-                deal = "prof"; txmlConn.Lb.BeginInvoke(deal + " " + s + "=>" + TransaqString.Cashs[x].Brokerref, "listBox1", null, null);
+                deal = "prof"; txmlConn.Lb.BeginInvoke(deal + " " + s + "=>" + txmlConn.RdBazaNew.TransaqString.Cashs[x].Brokerref, "listBox1", null, null);
             }
-            if (TransaqString.Cashs[x].Buysell == "B" && en > close)
+            if (txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell == "B" && en > close)
             {
                 double sp = Math.Round(Spred(en, close), 3); stopDeal += sp * quantity; //if (stop == null) stop = en.ToString(); else stop = stop + ";" + en;
                 string s = "{" + vr + "} " + "B" + " /  " + en + "/ " + close + "/ " + (sp * quantity) + 
                     "{" + txmlConn.QuotationsNew.Bid + "/" + txmlConn.QuotationsNew.Offer + "}"; //cs.vol52 = null;
                 Main_window.table_1_7.Text = lastDeal.ToString(); //dataGridView2.Rows[2].Cells[7].Value = vol60; 
-                deal = "stop"; txmlConn.Lb.BeginInvoke(deal + " " + s + "=>" + TransaqString.Cashs[x].Brokerref, "listBox1", null, null);
+                deal = "stop"; txmlConn.Lb.BeginInvoke(deal + " " + s + "=>" + txmlConn.RdBazaNew.TransaqString.Cashs[x].Brokerref, "listBox1", null, null);
             }
-            if (TransaqString.Cashs[x].Buysell == "B" && en < close)
+            if (txmlConn.RdBazaNew.TransaqString.Cashs[x].Buysell == "B" && en < close)
             {
                 double sp = Math.Round(Spred(en, close), 3); profStop += sp * quantity;
                 string s = "{" + vr + "} " + "B" + " / " + en + "/ " + close + "/ " + (sp * quantity) + "{" + txmlConn.QuotationsNew.Bid +
                     "/" + txmlConn.QuotationsNew.Offer + "}"; //cs.vol52 = null;
                 Main_window.table_1_7.Text = lastDeal.ToString(); //dataGridView2.Rows[2].Cells[7].Value = vol60; 
-                deal = "prof"; txmlConn.Lb.BeginInvoke(deal + " " + s + "=>" + TransaqString.Brokerref, "listBox1", null, null);
+                deal = "prof"; txmlConn.Lb.BeginInvoke(deal + " " + s + "=>" + txmlConn.RdBazaNew.TransaqString.Brokerref, "listBox1", null, null);
             }
             Main_window.table_3_7.Text = profStop - stopDeal + " %";
             BuySellCount(deal, x);
@@ -720,7 +720,7 @@ namespace zero
         int buySellCount;
         void BuySellCount(string deal, int x)
         {
-            if (deal == "prof" && x < TransaqString.Cashs.Count)
+            if (deal == "prof" && x < txmlConn.RdBazaNew.TransaqString.Cashs.Count)
             {
                 if (transaqString.Cashs[x].Buysell == "S") buySellCount--;
                 if (transaqString.Cashs[x].Buysell == "B") buySellCount++;

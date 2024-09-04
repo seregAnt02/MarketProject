@@ -141,7 +141,7 @@ namespace zero.Data
             }
             if (status == "matched" || status == "cancelled" || status == "disabled")
             { main_window.table_1_7.Text = txmlConn.RdBazaNew.Balance.ToString(); main_window.table_1_7.Foreground = Brushes.Black; }
-            if (status == "active" && txmlConn.RdBazaNew.TransaqString.Order != 0)
+            if (status == "active" && txmlConn.RdBazaNew.TransaqString.Order != 0 && button2 != null)
             { button2.Background = Brushes.Green; }
             else
             {
