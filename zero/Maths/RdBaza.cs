@@ -79,11 +79,11 @@ namespace zero
         //================================================================================
 
         int mus;
-        public void Calculate(string time, string seccode, string buysell,
+        public double Calculate(string time, string seccode, string buysell,
             double price, long orderno, int quantity, string brokerref)
         {
             string str = null;            
-            if (Main_window.comboBox1.Text == seccode)
+            if (Main_window != null && Main_window.comboBox1.Text == seccode || !txmlConn.RdBazaNew.AutoTestCheck)
             {
                 AddDeal(buysell, price, orderno, 0, brokerref);
                 mus = quantity; Delta = 0;
@@ -101,13 +101,14 @@ namespace zero
                     }
                     if (x == -1) { str = null; Balance = 0; Delta = 0; }
                 }
-                Main_window.label2.Dispatcher.Invoke(() => {
+                if(Main_window != null) Main_window.label2.Dispatcher.Invoke(() => {
                     Main_window.label2.Content = str;
                     Main_window.table_0_7.Text = Delta.ToString();
                     Main_window.table_1_7.Text = Balance.ToString();
                     Main_window.table_0_8.Text = sumDeal + "{" + buySellCount + "}";
                 });                    
             }
+            return Delta;
         }
         //===============================================================================
         void InsertCount(int x, string time, string buysell,
